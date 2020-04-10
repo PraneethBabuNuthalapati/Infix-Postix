@@ -1,0 +1,57 @@
+#include<stdio.h>
+char stack[100];
+int top = -1;
+void push(char d)
+{
+    stack[++top] = d;
+}
+ 
+char pop()
+{
+    if(top == -1)
+        return -1;
+    else
+        return stack[top--];
+}
+ 
+int priority(char d)
+{
+    if(d == '(')
+        return 0;
+    if(d == '+' || d == '-')
+        return 1;
+    if(d == '*' || d == '/')
+        return 2;
+}
+ 
+main()
+{
+    char exp[20];
+    char *p, d;
+    printf("Enter the expression :: ");
+    scanf("%s",exp);
+    p = exp;
+    while(*p != '\0')
+    {
+        if(isalnum(*p))
+            printf("%c",*p);
+        else if(*p == '(')
+            push(*p);
+        else if(*p == ')')
+        {
+            while((x = pop()) != '(')
+                printf("%c", d);
+        }
+        else
+        {
+            while(priority(stack[top]) >= priority(*p))
+                printf("%c",pop());
+            push(*p);
+        }
+        p++;
+    }
+    while(top != -1)
+    {
+        printf("%c",pop());
+    }
+}
